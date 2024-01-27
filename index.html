@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: black;
+      color: white;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 800;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .accordion-item {
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      background-color: #000;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .accordion-content {
+      /* height: 0; */
+      display: none;
+      transition: opacity 0.3s ease-in-out;
+      /* overflow-y: hidden; */
+    }
+
+    .accordion-item.active .accordion-content {
+      display: grid;
+      opacity: 1;
+      padding: 2rem 10px;
+    }
+
+    .sections {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .calculator-screen {
+      height: 90px;
+      background-color: #DC431C;
+
+
+      position: fixed;
+      top: 0px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10000;
+    }
+
+    .calculator-screen h6 {
+      margin-bottom: 1.5rem;
+    }
+
+    .total-price {
+      font-size: 3rem;
+    }
+
+    input[type="number"]:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    }
+
+    input[type="number"] {
+      width: 60px;
+      height: 30px;
+
+
+      /* width: 100%; */
+      padding: 0rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    /* CSS */
+    .subtraction,
+    .addition {
+      background: #003205;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 16px;
+      height: 30px;
+      outline: 0;
+      width: 35px;
+      padding: 2px 8px;
+      text-align: center;
+      text-rendering: geometricprecision;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+    }
+
+    .addition {
+      /* background: #003205; */
+      background-color: #DC431C;
+    }
+
+
+
+    .subtraction:active {
+      opacity: .8;
+    }
+
+    .accordion-item.active .accordion-content {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      column-gap: 2rem;
+      row-gap: 3rem;
+    }
+
+    .accordion-content img {
+      width: 200px;
+    }
+
+    .content-image,
+    .input-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .accordion-content h3 {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .accordion-item.active .accordion-header svg {
+      transform: rotate(-180deg);
+    }
+
+    .accordion-header {
+      position: relative;
+    }
+
+    .accordion-header svg {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .accordion {
+      margin-top: 4rem;
+    }
+
+    .page-title {
+      margin: 1rem 0;
+      text-align: center;
+      /* position: fixed; */
+      margin-top: 7rem
+    }
+
+    .page-title h1 {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+
+    .page-title p {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .cabinet p {
+      text-align: center;
+      margin: .5rem 0;
+    }
+
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* padding:  0px 4rem; */
+    }
+
+    .calculator-screen div,
+    .calculator-screens div {
+      margin: 0 1rem;
+
+    }
+
+    .flex-between div button {
+      background: #DC431C;
+      border: 4px solid black;
+      outline: none;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 16px;
+      outline: 0;
+      padding: 1rem 3rem;
+      text-align: center;
+      text-rendering: geometricprecision;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      transition: .7s;
+    }
+
+    .flex-between div button:hover {
+      background-color: #d12a00;
+    }
+
+    .fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 90px;
+      background-color: #DC431C;
+      z-index: 10000;
+    }
+
+    .accordion {
+      padding-bottom: 12rem;
+    }
+
+    .accordion-content {
+      padding-bottom: 8rem;
+    }
+
+    .calculator-screens {
+      padding: 1rem 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      .accordion-item.active .accordion-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .accordion-content img {
+        width: 80px;
+        height: 80px;
+      }
+
+      input[type="number"] {
+        width: 30px
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .accordion-item.active .accordion-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      .page-title p {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .total-price,
+      .total-price-two {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="sections">
+    <div class="page-title">
+      <h1>Space Calculator</h1>
+      <p>A handy tool to help you figure out an estimate of volume required in cubic meters (M³)</p>
+    </div>
+
+    <div class="flex-between">
+      <div class="calculator-screen flex-between">
+        <div>
+          <h5>Total:</h5>
+          <h1 class="total-price">0</h1>
+        </div>
+
+        <div>
+          <button onclick="handleNext()">Next</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Dining Room</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="crystalCabinet">
+            <h3>Crystal cabinet</h3>
+            <p>1.42 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_c0428f68e0f24d45a129c859a2716629~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="buffetCabinet">
+            <h3>Buffet cabinet</h3>
+            <p>0.66 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_439d2025f3e54aeb9c6ac259b1a0a353~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="diningChair">
+            <h3>Dining Chair</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_22131cc0508a453bb37ff5166554f108~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="diningTable4">
+            <h3>Dining Table for Four</h3>
+            <p>0.95 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="diningTable6">
+            <h3>Dining Table for Six</h3>
+            <p>1.42 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="diningTable8">
+            <h3>Dining Table for Eight</h3>
+            <p>2.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCartonBoxes">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.76 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Living Room</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="bookCase">
+            <h3>Book Case</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_66e7d9a5e63f4ac0a9440cf2d1e95ccc~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="chinaCabinet">
+            <h3>China Cabinet</h3>
+            <p>0.62 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_7d34a6213664492b86e453c95c427b1f~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="wallUnit">
+            <h3>Wall Unit</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_79aa40ada312421183b3f3719cb59451~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="tvUnit">
+            <h3>TV Unit</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4f22587b51cf4c08b78e5bc7dcd9c56f~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="armChair">
+            <h3>Arm Chair</h3>
+            <p>0.48 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_32325dd8cbba46a982173940bb6a9fe3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="bureau">
+            <h3>Bureau</h3>
+            <p>0.52 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_7a12d7197b1943ca93a0d3c2ebfa63fa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="liquorCabinet">
+            <h3>Liquor Cabinet</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3a07d873b71242e6bb4a71165f4a90bb~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="barstool">
+            <h3>Barstool</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27b391b64ed942ee88dbbcd5084975c0~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="billiardTable">
+            <h3>Billiard Table</h3>
+            <p>2.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="twoSofaSeater">
+            <h3>Two Seater Sofa</h3>
+            <p>0.95 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_f772501e33cd4fc5b72a451579eaa648~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="threeSeaterSofa">
+            <h3>Three Seater Sofa</h3>
+            <p>1.23 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_9b22a547e06f43139937a46d51f0e5e0~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="wallFirePlace">
+            <h3>Wall Mounted Fire Place</h3>
+            <p>0.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1fb20c6e5914c6fbfa47f540288b3c3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="cornerSofa">
+            <h3>Corner Sofa</h3>
+            <p>2.18 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d096da94792f474bb51e1ccdb50754e5~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="divian">
+            <h3>Divan</h3>
+            <p>1.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_10fa6c75847b4122918b9085806e5b3c~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="lampTable">
+            <h3>Lamp Table</h3>
+            <p>0.24 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_b3fc417f9b4d4b10a23878efb76b5f64~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="Piano">
+            <h3>Piano</h3>
+            <p>0.95 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d6544bf47aee4498be2bd2ddb051dd62~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="pianoStool">
+            <h3>Piano Stool</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5b8f9d77213b48edb77d07217792faf5~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="desk">
+            <h3>Desk</h3>
+            <p>0.43 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_a42c483602cd4f12b20629ac0284a3a6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="flatScreenTv">
+            <h3>Flat-Screen TV</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_bcbd1825a08b4f5bafe398b14ada18de~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="cabinet" id="sofaFootrest">
+            <h3>Sofa Footrest</h3>
+            <p>0.24 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_afab40be7a24410f80c021d7a102562b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="soundSysten">
+            <h3>Sound System</h3>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba97c96fe6ac4b6a9bef3e2f17751a1e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="officeChair">
+            <h3>Office Chair</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_4b8a4dbf24914f35afd3740907608221~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="coffeTable">
+            <h3>Coffee Table</h3>
+            <p>0.24 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_b3fc417f9b4d4b10a23878efb76b5f64~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="largeBeanBag">
+            <h3>Large Bean Bag</h3>
+            <p>0.48 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_151b992f020a4b2fbd466d1e910b8562~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="pianoStool">
+            <h3>Medium Shelving</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5e04eae6012f4952a3d6b758ae858b15~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCartonBoxes2">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Kitchen</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="hoosierCabinet">
+            <h3>Hoosier Cabinet</h3>
+            <p>1.42 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="smallChestFreezer">
+            <h3>Small Chest Freezer</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="kitchenChair">
+            <h3>Kitchen Chair</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="singleFridge">
+            <h3>Single Fridge</h3>
+            <p>0.52 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="doubleFridge">
+            <h3>Double Fridge</h3>
+            <p>1.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="cookerWithOven">
+            <h3>Cooker With Oven</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="microwave">
+            <h3>Microwave</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1d4de95ac33451195dadfbed196feea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="smallFridge">
+            <h3>Small Fridge</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27c7a9e88ccd49668a764b419562c42d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="largeTable">
+            <h3>Large Table</h3>
+            <p>1.42 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="smallTable">
+            <h3>Small Table</h3>
+            <p>0.62 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="highChair">
+            <h3>High-Chair</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_475b3a5a677a4ad5b32018e2eb22d599~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="dishwasher">
+            <h3>Dishwasher</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_2321ba6508df4819a221ee9925a2290e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="stool">
+            <h3>Stool</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_bb075bc72d1547c58237bc00d711cfad~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="wineChiller">
+            <h3>Wine Chiller</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3688562c9df042ed8e6286f40883186e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="butcherBlock">
+            <h3>Butcher Block</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_7b262eabd4824a519693a27302c7cfa0~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="doubleChestFreezer">
+            <h3>Double Chest Freezer</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_69b28339bfa04463aa84b0ecd9029a8e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCartonBoxes3">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Hallway</h1>
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="vase">
+            <h3>Vase</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5fa1ca44e7db443eb1d15435d5590949~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="coatStand">
+            <h3>Coat Stand</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_bcb7f4bc1e3b45c9b10c415f0f8348e9~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="hallwayChair">
+            <h3>Chair</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="hallStand">
+            <h3>Hall Stand</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_7df44b4fdfcc49d89c4efece6d32067f~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="pictureFrames">
+            <h3>Picture Frames</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_2a6b5a102e1c4759abe5920f67e96088~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="dropSideTable">
+            <h3>Drop-Side Table</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_0a0239027d2049939909da08b95f9353~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="hallwayTable">
+            <h3>Hallway Table</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_1337b4434fac49c7b4d3f84f7149ab17~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="storageChest">
+            <h3>Storage Chest</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_868abe687ee64974aa05d7f67fadffb6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="grandFatherClock">
+            <h3>Grand-father Clock</h3>
+            <p>0.24 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_075848f634b246c58363b3962e74badf~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCartonBoxes4">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Bedroom</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="singleBedAndMattress">
+            <h3>Single Bed & Mattress</h3>
+            <p>0.71 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_1db6c4e35d1a475abb2f7f0ecc277718~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="queenBedAndMattress">
+            <h3>Queen Bed & Mattress</h3>
+            <p>0.95 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_bef58e1ae3e443c9b26d0861f8cbec34~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="kingBedAndMattress">
+            <h3>King Bed & Mattress</h3>
+            <p>1.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_bef58e1ae3e443c9b26d0861f8cbec34~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="bedsideTable">
+            <h3>Bedside Table</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_842bd591639b49de89cf42e7c9f308d6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="chestOfDrawers">
+            <h3>Chest of Drawers</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_170cd83803f74182aefef1c8443a95c4~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="chevalMirror">
+            <h3>Cheval Mirror</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d99ad60e9ef94b488f850838d013fdc6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="toys">
+            <h3>Toys</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_f11631ae7cb7425caddcddcfc01897a9~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="bedroomChair">
+            <h3>Chair</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_22131cc0508a453bb37ff5166554f108~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="bedroomDesk">
+            <h3>Desk</h3>
+            <p>0.43 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_a42c483602cd4f12b20629ac0284a3a6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="childStool">
+            <h3>Child Stool</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27ad6bd1e7304404a4b36ec3049e0177~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="cabinet" id="cot">
+            <h3>Cot</h3>
+            <p>0.66 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_de778462de344a7d85de4e05328bd89d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="twoDoorWardrobe">
+            <h3>Two Door Wardrobe</h3>
+            <p>1.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_64f13badbba9496ead5e56c53cfb189c~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="threeDoorWardrobe">
+            <h3>Three Door Wardrobe</h3>
+            <p>1.52 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_50c29cf551da4588b17be7c401452483~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="mirrorDressingTable">
+            <h3>Mirror Dressing Table</h3>
+            <p>0.62 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_af79f8539bdb44768f49a8a321693083~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCartonBoxes5">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Outside & Garden</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="satelliteDish">
+            <h3>Satellite Dish</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_f79d2db1fc034125a37c4f8cbad0e2d0~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="stonePedestal">
+            <h3>Stone Pedestal</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_1888d1f41e024bbbb07cf555896729a3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="childPlayTable">
+            <h3>Child Play Table</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27ad6bd1e7304404a4b36ec3049e0177~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="portableCooler">
+            <h3>Portable Cooler</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_471cddc1dcdb44dca8a5e7231a371fc5~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="foldingChair">
+            <h3>Folding Chairs</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d15f43e8dccb45b996ce6c186bd72e28~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="campingGear">
+            <h3>Camping Gear</h3>
+            <p>0.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_b21cc97b03df4d5cb93960b3e0e2dd96~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="barbeque">
+            <h3>Barbeque</h3>
+            <p>0.71 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54bfd5402bf3431883542123d6101876~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="wheelBarrow">
+            <h3>Wheel-barrow</h3>
+            <p>0.43 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_03fd90df4d1e49d2a08d09c2f8cdd1e0~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="picnicTable">
+            <h3>Picnic Table</h3>
+            <p>1.81 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_4fb7a5a65879498a9931b71db736bb87~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="scooter">
+            <h3>Scooter</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_8d5b92665ff84f1e828d0f0a35f1da5d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="ladder">
+            <h3>Ladder</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_7cfc5d7533f6427e987d9bfb5585aeea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="workBench">
+            <h3>Work Bench</h3>
+            <p>0.86 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_e5b992eaa0d44a999ae3b2a42798dff2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="toolBox">
+            <h3>Tool Box</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_b82e9b0debf945d382d9e7eba383e73e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="bicycle">
+            <h3>Bicycle</h3>
+            <p>0.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d4ab40fa2b7b41a0b193859f4c40bd65~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="waterHose">
+            <h3>Water Hose</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_f36218c04fed489d90b6b8aa859dfd29~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="largeBin">
+            <h3>Large Bin</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_17a5b95dd48e4f5f9b5a90f80a47b53f~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="deckChair">
+            <h3>Deck Chair</h3>
+            <p>0.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_650f4667d9b442a3a9a917529e6b27ee~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="fishingGear">
+            <h3>Fishing Gear</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_de1e87a4acf945c4b65c0886b71cb8b4~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="plantPots">
+            <h3>Plant Pots</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_739b43e1611e4bab99a8abb4e97c797e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="cabinet" id="largeUmbrella">
+            <h3>Large Umbrella</h3>
+            <p>0.19 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e69c3bad1f3d460b94b8cd7861ea96b5~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="gardenTools">
+            <h3>Garden Tools</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_4a13692f1f4d4935ac80f6a0eb9bc098~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="closedTableSoccer">
+            <h3>Closed Table Soccer</h3>
+            <p>0.48 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ad8c5f69d5194cc9b6427e4f4a227758~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="closedTrampoline">
+            <h3>Closed Trampoline</h3>
+            <p>0.48 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_7754c6a672dc4ba1ba6462cedb522b3e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="trike">
+            <h3>Trike</h3>
+            <p>0.14 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba551900f87f481ab982eaa0fd2ee82c~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="closedPortableGazebo">
+            <h3>Closed Portable Gazebo</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_1e3bb480d21f4afd8f9bdb1ea7f11f1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="outdoorFurnitureSet">
+            <h3>Outdoor Furniture Set</h3>
+            <p>2.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_1a4b09b735c24039a9fe841b605fb16c~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="cabinet" id="tableTennisClosed">
+            <h3>Table Tennis (closed)</h3>
+            <p>0.96 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_de0a911d19c3496cb57432b6dea6c8de~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCarbonBox6">
+            <h3>Packed Carbon Boxes</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Laundry Room</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="washingMachine">
+            <h3>Wahing Machine</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_29abee0138914ffb91bec151b9efa132~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="tumbleDryer">
+            <h3>Tumble Dryer</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d67038ea787743e5beffc95c48f3d664~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="laundryHorse">
+            <h3>Laundry Horse</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_57a7d957a2df413182e5a2dec1b98385~mv2.jpg" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="broomSticks">
+            <h3>Broom Sticks</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5238d6a1c9ec4d7292dfd66f7a6e6979~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="vacuumCleaner">
+            <h3>Vacuum Claner</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_a64453f234f1491e824d585b6381fdc6~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="laundryBasket">
+            <h3>Laundry Basket</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_086c6736c8734a398cc3a75e42972f47~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="smallLaundryCupboard">
+            <h3>Small Laundry Cupboard</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_943d4102fd37444ea57c279ea5440a4a~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="ironingBoard">
+            <h3>Ironing Board</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_7dcccb9b7ed244f8ad2d8aaad5eaf895~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCarbonBox7">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Box Room</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="foldingBed">
+            <h3>Folding Bed</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_bc8f92625265461f8ebf2214645a48a3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="boxingBench">
+
+            <h3>Bench</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_47a7a54a55204739ac4b2e917ccc92ba~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="heater">
+            <h3>Heater</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_47a7a54a55204739ac4b2e917ccc92ba~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="suitcases">
+            <h3>Suitcases</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_96f745638cdb45a7a088394ec58cae74~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="boxRoomFan">
+            <h3>Fan</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e3c1d020176e45f49d842d61450965b7~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="vacuumCleaner">
+            <h3>Mats & Rugs</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5a6e8ad9943441e88fe7a56ff7dd2d44~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="boxRoomCupboard">
+            <h3>Box Room Cupboard</h3>
+            <p>0.57 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_f5f99b5d8e194e6f893dc42cb14f7c9b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="boxRoomFoldingChair">
+            <h3>Folding Chair</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_fee2cdd4f12248e38c7167b7a2bdc43c~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="fillingCabinet">
+            <h3>Filling Cabinet</h3>
+            <p>0.38 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_2e18e53f415a481d8f2d4e4197dd1405~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="foldingCardTable">
+            <h3>Folding Card Table</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_2c7933ac87d64198888f0c4d2d5d69b3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="pram">
+            <h3>Pram</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_dbb88ef3e0764a3e8d7402dd4546e10e~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="sewingMachineCabinet">
+            <h3>Sewing Machine Cabinet</h3>
+            <p>0.28 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_5936a6316b7e46c596eeade014d62862~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="packedCarbonBox8">
+            <h3>Packed Carton Boxes</h3>
+            <p>0.1 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_4e66e82ffe4c4dbfb52342a34ba955e3~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fixed">
+      <div class="calculator-screens flex-between">
+        <div>
+          <h5>Total:</h5>
+          <h1 class="total-price-two">0</h1>
+        </div>
+
+        <div>
+          <button onclick="handleNext()">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <script>
+    let crystalValue = 0;
+    let buffetValue = 0;
+    let diningValue = 0;
+    let diningTable4 = 0;
+    let diningTable6 = 0;
+    let diningTable8 = 0;
+    let packedCartonBoxes = 0;
+
+    let bookCaseValue = 0;
+    let chinaCabinetValue = 0;
+    let wallUnitValue = 0;
+    let tvUnitValue = 0;
+    let armChairValue = 0;
+    let bureauValue = 0;
+    let liquorCabinetValue = 0;
+    let barstoolValue = 0;
+    let billiardTableValue = 0;
+    let twoSeaterSofaValue = 0;
+    let threeSeaterSofaValue = 0;
+    let wallFirePlaceValue = 0;
+    let cornerSofaValue = 0;
+    let divianValue = 0;
+    let lampTableValue = 0;
+    let pianoValue = 0;
+    let pianoStoolValue = 0;
+    let deskValue = 0;
+    let flatScreenTvValue = 0;
+    let sofaFootrestValue = 0;
+    let soundSystemValue = 0;
+    let officeChairValue = 0;
+    let coffeeTableValue = 0;
+    let largeBeanBagValue = 0;
+    let mediumShelvingValue = 0;
+    let packedCartonBoxes2Value = 0;
+
+    let hoosierCabinetValue = 0;
+    let smallChestFreezerValue = 0;
+    let kitchenChairValue = 0;
+    let singleFridgeValue = 0;
+    let doubleFridgeValue = 0;
+    let cookerWithOvenValue = 0;
+    let microwaveValue = 0;
+    let smallFridgeValue = 0;
+    let largeTableValue = 0;
+    let smallTableValue = 0;
+    let highChairValue = 0;
+    let dishwasherValue = 0;
+    let stoolValue = 0;
+    let wineChillerValue = 0;
+    let butcherBlockValue = 0;
+    let doubleChestFreezerValue = 0;
+    let packedCartonBoxes3Value = 0;
+
+    let vaseValue = 0;
+    let coatStandValue = 0;
+    let hallwayChairValue = 0;
+    let hallStandValue = 0;
+    let dropSideTableValue = 0;
+    let pictureFramesValue = 0;
+    let hallwayTableValue = 0;
+    let storageChestValue = 0;
+    let grandFatherClockValue = 0;
+    let packedCartonBoxes4Value = 0;
+    let hallwaySmallTableValue = 0;
+    let hallwayHighChairValue = 0;
+
+    let singleBedAndMattressValue = 0;
+    let queenBedAndMattressValue = 0;
+    let kingBedAndMattressValue = 0;
+    let bedsideTableValue = 0;
+    let chestOfDrawersValue = 0;
+    let chevalMirrorValue = 0;
+    let toysValue = 0;
+    let bedroomChairValue = 0;
+    let bedroomDeskValue = 0;
+    let childStoolValue = 0;
+    let cotValue = 0;
+    let twoDoorWardrobeValue = 0;
+    let threeDoorWardrobeValue = 0;
+    let mirrorDressingTableValue = 0;
+    let packedCartonBoxes5Value = 0;
+
+
+    let satelliteDishValue = 0;
+    let stonePedestalValue = 0;
+    let childPlayTableValue = 0;
+    let portableCoolerValue = 0;
+    let foldingChairValue = 0;
+    let campingGearValue = 0;
+    let barbequeValue = 0;
+    let wheelBarrowValue = 0;
+    let picnicTableValue = 0;
+    let scooterValue = 0;
+    let ladderValue = 0;
+    let workBenchValue = 0;
+    let toolBoxValue = 0;
+    let bicycleValue = 0;
+    let waterHoseValue = 0;
+    let largeBinValue = 0;
+    let deckChairValue = 0;
+    let fishingGearValue = 0;
+    let plantPotsValue = 0;
+    let largeUmbrellaValue = 0;
+    let gardenToolsValue = 0;
+    let closedTableSoccerValue = 0;
+    let closedTrampolineValue = 0;
+    let trikeValue = 0;
+    let closedPortableGazeboValue = 0;
+    let outdoorFurnitureSetValue = 0;
+    let tableTennisClosedValue = 0;
+    let packedCarbonBox6Value = 0;
+
+
+    let washingMachineValue = 0;
+    let tumbleDryerValue = 0;
+    let laundryHorseValue = 0;
+    let broomSticksValue = 0;
+    let vacuumCleanerValue = 0;
+    let laundryBasketValue = 0;
+    let smallLaundryCupboardValue = 0;
+    let ironingBoardValue = 0;
+    let packedCarbonBox7Value = 0;
+
+
+    let foldingBedValue = 0;
+    let heaterValue = 0;
+    let suitcasesValue = 0;
+    let boxRoomFanValue = 0;
+    let matsRugsValue = 0;
+    let boxRoomCupboardValue = 0;
+    let boxRoomFoldingChairValue = 0;
+    let fillingCabinetValue = 0;
+    let foldingCardTableValue = 0;
+    let pramValue = 0;
+    let sewingMachineCabinetValue = 0;
+    let packedCarbonBox8Value = 0;
+    let boxingBenchValue = 0;
+
+
+    function adjustValue(button, value) {
+      const inputElement = button.parentNode.querySelector('.number-input');
+      const cabinetType = button.closest('.cabinet').id;
+
+      let inputValue = parseInt(inputElement.value) || 0;
+      inputValue = Math.max(0, inputValue + value);
+
+
+
+      if (cabinetType === 'crystalCabinet') {
+        crystalValue = inputValue;
+      } else if (cabinetType === 'buffetCabinet') {
+        buffetValue = inputValue;
+      } else if (cabinetType === 'diningChair') {
+        diningValue = inputValue;
+      } else if (cabinetType === "diningTable4") {
+        diningTable4 = inputValue;
+      } else if (cabinetType === "diningTable6") {
+        diningTable6 = inputValue;
+      } else if (cabinetType === "diningTable8") {
+        diningTable8 = inputValue;
+      } else if (cabinetType === "packedCartonBoxes") {
+        packedCartonBoxes = inputValue;
+      } else if (cabinetType === 'bookCase') {
+        bookCaseValue = inputValue;
+      } else if (cabinetType === 'chinaCabinet') {
+        chinaCabinetValue = inputValue;
+      } else if (cabinetType === 'wallUnit') {
+        wallUnitValue = inputValue;
+      } else if (cabinetType === 'tvUnit') {
+        tvUnitValue = inputValue;
+      } else if (cabinetType === 'armChair') {
+        armChairValue = inputValue;
+      } else if (cabinetType === 'bureau') {
+        bureauValue = inputValue;
+      } else if (cabinetType === 'liquorCabinet') {
+        liquorCabinetValue = inputValue;
+      } else if (cabinetType === 'barstool') {
+        barstoolValue = inputValue;
+      } else if (cabinetType === 'billiardTable') {
+        billiardTableValue = inputValue;
+      } else if (cabinetType === 'twoSofaSeater') {
+        twoSeaterSofaValue = inputValue;
+      } else if (cabinetType === 'threeSeaterSofa') {
+        threeSeaterSofaValue = inputValue;
+      } else if (cabinetType === 'wallFirePlace') {
+        wallFirePlaceValue = inputValue;
+      } else if (cabinetType === 'cornerSofa') {
+        cornerSofaValue = inputValue;
+      } else if (cabinetType === 'divian') {
+        divianValue = inputValue;
+      } else if (cabinetType === 'lampTable') {
+        lampTableValue = inputValue;
+      } else if (cabinetType === 'Piano') {
+        pianoValue = inputValue;
+      } else if (cabinetType === 'pianoStool') {
+        pianoStoolValue = inputValue;
+      } else if (cabinetType === 'desk') {
+        deskValue = inputValue;
+      } else if (cabinetType === 'flatScreenTv') {
+        flatScreenTvValue = inputValue;
+      } else if (cabinetType === 'sofaFootrest') {
+        sofaFootrestValue = inputValue;
+      } else if (cabinetType === 'soundSystem') {
+        soundSystemValue = inputValue;
+      } else if (cabinetType === 'officeChair') {
+        officeChairValue = inputValue;
+      } else if (cabinetType === 'coffeTable') {
+        coffeeTableValue = inputValue;
+      } else if (cabinetType === 'largeBeanBag') {
+        largeBeanBagValue = inputValue;
+      } else if (cabinetType === 'mediumShelving') {
+        mediumShelvingValue = inputValue;
+      } else if (cabinetType === 'packedCartonBoxes2') {
+        packedCartonBoxes2Value = inputValue;
+      } else if (cabinetType === 'hoosierCabinet') {
+        hoosierCabinetValue = inputValue;
+      } else if (cabinetType === 'smallChestFreezer') {
+        smallChestFreezerValue = inputValue;
+      } else if (cabinetType === 'kitchenChair') {
+        kitchenChairValue = inputValue;
+      } else if (cabinetType === 'singleFridge') {
+        singleFridgeValue = inputValue;
+      } else if (cabinetType === 'doubleFridge') {
+        doubleFridgeValue = inputValue;
+      } else if (cabinetType === 'cookerWithOven') {
+        cookerWithOvenValue = inputValue;
+      } else if (cabinetType === 'microwave') {
+        microwaveValue = inputValue;
+      } else if (cabinetType === 'smallFridge') {
+        smallFridgeValue = inputValue;
+      } else if (cabinetType === 'largeTable') {
+        largeTableValue = inputValue;
+      } else if (cabinetType === 'smallTable') {
+        smallTableValue = inputValue;
+      } else if (cabinetType === 'highChair') {
+        highChairValue = inputValue;
+      } else if (cabinetType === 'dishwasher') {
+        dishwasherValue = inputValue;
+      } else if (cabinetType === 'stool') {
+        stoolValue = inputValue;
+      } else if (cabinetType === 'wineChiller') {
+        wineChillerValue = inputValue;
+      } else if (cabinetType === 'butcherBlock') {
+        butcherBlockValue = inputValue;
+      } else if (cabinetType === 'doubleChestFreezer') {
+        doubleChestFreezerValue = inputValue;
+      } else if (cabinetType === 'packedCartonBoxes3') {
+        packedCartonBoxes3Value = inputValue;
+      } else if (cabinetType === 'hallwayChair') {
+        hallwayChairValue = inputValue;
+      } else if (cabinetType === 'hallStand') {
+        hallStandValue = inputValue;
+      } else if (cabinetType === 'dropSideTable') {
+        dropSideTableValue = inputValue;
+      } else if (cabinetType === 'hallwayTable') {
+        hallwayTableValue = inputValue;
+      } else if (cabinetType === 'storageChest') {
+        storageChestValue = inputValue;
+      } else if (cabinetType === 'grandFatherClock') {
+        grandFatherClockValue = inputValue;
+      } else if (cabinetType === 'packedCartonBoxes4') {
+        packedCartonBoxes4Value = inputValue;
+      } else if (cabinetType === 'hallwaySmallTable') {
+        hallwaySmallTableValue = inputValue;
+      } else if (cabinetType === 'hallwayHighChair') {
+        hallwayHighChairValue = inputValue;
+      } else if (cabinetType === 'vase') {
+        vaseValue = inputValue;
+      } else if (cabinetType === 'coatStand') {
+        coatStandValue = inputValue;
+      } else if (cabinetType === 'pictureFrames') {
+        pictureFramesValue = inputValue;
+      } else if (cabinetType === 'singleBedAndMattress') {
+        singleBedAndMattressValue = inputValue;
+      } else if (cabinetType === 'queenBedAndMattress') {
+        queenBedAndMattressValue = inputValue;
+      } else if (cabinetType === 'kingBedAndMattress') {
+        kingBedAndMattressValue = inputValue;
+      } else if (cabinetType === 'bedsideTable') {
+        bedsideTableValue = inputValue;
+      } else if (cabinetType === 'chestOfDrawers') {
+        chestOfDrawersValue = inputValue;
+      } else if (cabinetType === 'chevalMirror') {
+        chevalMirrorValue = inputValue;
+      } else if (cabinetType === 'toys') {
+        toysValue = inputValue;
+      } else if (cabinetType === 'bedroomChair') {
+        bedroomChairValue = inputValue;
+      } else if (cabinetType === 'bedroomDesk') {
+        bedroomDeskValue = inputValue;
+      } else if (cabinetType === 'childStool') {
+        childStoolValue = inputValue;
+      } else if (cabinetType === 'cot') {
+        cotValue = inputValue;
+      } else if (cabinetType === 'twoDoorWardrobe') {
+        twoDoorWardrobeValue = inputValue;
+      } else if (cabinetType === 'threeDoorWardrobe') {
+        threeDoorWardrobeValue = inputValue;
+      } else if (cabinetType === 'mirrorDressingTable') {
+        mirrorDressingTableValue = inputValue;
+      } else if (cabinetType === 'packedCartonBoxes5') {
+        packedCartonBoxes5Value = inputValue;
+      } else if (cabinetType === 'satelliteDish') {
+        satelliteDishValue = inputValue;
+      } else if (cabinetType === 'stonePedestal') {
+        stonePedestalValue = inputValue;
+      } else if (cabinetType === 'childPlayTable') {
+        childPlayTableValue = inputValue;
+      } else if (cabinetType === 'portableCooler') {
+        portableCoolerValue = inputValue;
+      } else if (cabinetType === 'foldingChair') {
+        foldingChairValue = inputValue;
+      } else if (cabinetType === 'campingGear') {
+        campingGearValue = inputValue;
+      } else if (cabinetType === 'barbeque') {
+        barbequeValue = inputValue;
+      } else if (cabinetType === 'wheelBarrow') {
+        wheelBarrowValue = inputValue;
+      } else if (cabinetType === 'picnicTable') {
+        picnicTableValue = inputValue;
+      } else if (cabinetType === 'scooter') {
+        scooterValue = inputValue;
+      } else if (cabinetType === 'ladder') {
+        ladderValue = inputValue;
+      } else if (cabinetType === 'workBench') {
+        workBenchValue = inputValue;
+      } else if (cabinetType === 'toolBox') {
+        toolBoxValue = inputValue;
+      } else if (cabinetType === 'bicycle') {
+        bicycleValue = inputValue;
+      } else if (cabinetType === 'waterHose') {
+        waterHoseValue = inputValue;
+      } else if (cabinetType === 'largeBin') {
+        largeBinValue = inputValue;
+      } else if (cabinetType === 'deckChair') {
+        deckChairValue = inputValue;
+      } else if (cabinetType === 'fishingGear') {
+        fishingGearValue = inputValue;
+      } else if (cabinetType === 'plantPots') {
+        plantPotsValue = inputValue;
+      } else if (cabinetType === 'largeUmbrella') {
+        largeUmbrellaValue = inputValue;
+      } else if (cabinetType === 'gardenTools') {
+        gardenToolsValue = inputValue;
+      } else if (cabinetType === 'closedTableSoccer') {
+        closedTableSoccerValue = inputValue;
+      } else if (cabinetType === 'closedTrampoline') {
+        closedTrampolineValue = inputValue;
+      } else if (cabinetType === 'trike') {
+        trikeValue = inputValue;
+      } else if (cabinetType === 'closedPortableGazebo') {
+        closedPortableGazeboValue = inputValue;
+      } else if (cabinetType === 'outdoorFurnitureSet') {
+        outdoorFurnitureSetValue = inputValue;
+      } else if (cabinetType === 'tableTennisClosed') {
+        tableTennisClosedValue = inputValue;
+      } else if (cabinetType === 'packedCarbonBox6') {
+        console.log("six");
+        packedCarbonBox6Value = inputValue;
+      } else if (cabinetType === 'washingMachine') {
+        washingMachineValue = inputValue;
+      } else if (cabinetType === 'tumbleDryer') {
+        tumbleDryerValue = inputValue;
+      } else if (cabinetType === 'laundryHorse') {
+        laundryHorseValue = inputValue;
+      } else if (cabinetType === 'broomSticks') {
+        broomSticksValue = inputValue;
+      } else if (cabinetType === 'vacuumCleaner') {
+        vacuumCleanerValue = inputValue;
+      } else if (cabinetType === 'laundryBasket') {
+        laundryBasketValue = inputValue;
+      } else if (cabinetType === 'smallLaundryCupboard') {
+        smallLaundryCupboardValue = inputValue;
+      } else if (cabinetType === 'ironingBoard') {
+        ironingBoardValue = inputValue;
+      } else if (cabinetType === 'packedCarbonBox7') {
+        packedCarbonBox7Value = inputValue;
+      } else if (cabinetType === 'foldingBed') {
+        foldingBedValue = inputValue;
+      } else if (cabinetType === 'heater') {
+        heaterValue = inputValue;
+      } else if (cabinetType === 'suitcases') {
+        suitcasesValue = inputValue;
+      } else if (cabinetType === 'boxRoomFan') {
+        boxRoomFanValue = inputValue;
+      } else if (cabinetType === 'matsRugs') {
+        matsRugsValue = inputValue;
+      } else if (cabinetType === 'boxRoomCupboard') {
+        boxRoomCupboardValue = inputValue;
+      } else if (cabinetType === 'boxRoomFoldingChair') {
+        boxRoomFoldingChairValue = inputValue;
+      } else if (cabinetType === 'fillingCabinet') {
+        fillingCabinetValue = inputValue;
+      } else if (cabinetType === 'foldingCardTable') {
+        foldingCardTableValue = inputValue;
+      } else if (cabinetType === 'pram') {
+        pramValue = inputValue;
+      } else if (cabinetType === 'sewingMachineCabinet') {
+        sewingMachineCabinetValue = inputValue;
+      } else if (cabinetType === 'packedCarbonBox8') {
+        packedCarbonBox8Value = inputValue;
+      } else if (cabinetType === 'foldingBed') {
+        foldingBedValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'heater') {
+        heaterValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'suitcases') {
+        suitcasesValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'boxRoomFan') {
+        boxRoomFanValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'matsRugs') {
+        matsRugsValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'boxRoomCupboard') {
+        boxRoomCupboardValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'boxRoomFoldingChair') {
+        boxRoomFoldingChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'fillingCabinet') {
+        fillingCabinetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'foldingCardTable') {
+        foldingCardTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'pram') {
+        pramValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'sewingMachineCabinet') {
+        sewingMachineCabinetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCarbonBox8') {
+        packedCarbonBox8Value = parseInt(input.value) || 0;
+      } else if (cabinetType === "boxingBench") {
+        boxingBenchValue = inputValue
+      }
+
+
+      inputElement.value = inputValue;
+      updateTotalPrice();
+    }
+
+    function handleInput(input) {
+      const cabinetType = input.closest('.cabinet').id;
+
+      console.log(cabinetType);
+
+      if (cabinetType === 'crystalCabinet') {
+        crystalValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'buffetCabinet') {
+        buffetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'diningChair') {
+        diningValue = parseInt(input.value) || 0;
+      } else if (cabinetType === "diningTable4") {
+        diningTable4 = parseInt(input.value) || 0;
+      } else if (cabinetType === "diningTable6") {
+        diningTable6 = parseInt(input.value) || 0;
+      } else if (cabinetType === "diningTable8") {
+        diningTable8 = parseInt(input.value) || 0;
+      } else if (cabinetType === "packedCartonBoxes") {
+        packedCartonBoxes = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bookCase') {
+        bookCaseValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'chinaCabinet') {
+        chinaCabinetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'wallUnit') {
+        wallUnitValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'tvUnit') {
+        tvUnitValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'armChair') {
+        armChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bureau') {
+        bureauValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'liquorCabinet') {
+        liquorCabinetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'barstool') {
+        barstoolValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'billiardTable') {
+        billiardTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'twoSeaterSofa') {
+        twoSeaterSofaValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'threeSeaterSofa') {
+        threeSeaterSofaValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'wallFirePlace') {
+        wallFirePlaceValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'cornerSofa') {
+        cornerSofaValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'divian') {
+        divianValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'lampTable') {
+        lampTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'Piano') {
+        pianoValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'pianoStool') {
+        pianoStoolValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'desk') {
+        deskValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'flatScreenTv') {
+        flatScreenTvValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'sofaFootrest') {
+        sofaFootrestValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'soundSystem') {
+        soundSystemValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'officeChair') {
+        officeChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'coffeTable') {
+        coffeeTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeBeanBag') {
+        largeBeanBagValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'mediumShelving') {
+        mediumShelvingValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCartonBoxes') {
+        packedCartonBoxes2Value = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hoosierCabinet') {
+        hoosierCabinetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'smallChestFreezer') {
+        smallChestFreezerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'kitchenChair') {
+        kitchenChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'singleFridge') {
+        singleFridgeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'doubleFridge') {
+        doubleFridgeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'cookerWithOven') {
+        cookerWithOvenValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'microwave') {
+        microwaveValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'smallFridge') {
+        smallFridgeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeTable') {
+        largeTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'smallTable') {
+        smallTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'highChair') {
+        highChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'dishwasher') {
+        dishwasherValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'stool') {
+        stoolValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'wineChiller') {
+        wineChillerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'butcherBlock') {
+        butcherBlockValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'doubleChestFreezer') {
+        doubleChestFreezerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCartonBoxes3') {
+        packedCartonBoxes3Value = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hallwayChair') {
+        hallwayChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hallStand') {
+        hallStandValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'dropSideTable') {
+        dropSideTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hallwayTable') {
+        hallwayTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'storageChest') {
+        storageChestValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'grandFatherClock') {
+        grandFatherClockValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCartonBoxes4') {
+        packedCartonBoxes4Value = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hallwaySmallTable') {
+        hallwaySmallTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'hallwayHighChair') {
+        hallwayHighChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'vase') {
+        vaseValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'coatStand') {
+        coatStandValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'pictureFrames') {
+        pictureFramesValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'singleBedAndMattress') {
+        singleBedAndMattressValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'queenBedAndMattress') {
+        queenBedAndMattressValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'kingBedAndMattress') {
+        kingBedAndMattressValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bedsideTable') {
+        bedsideTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'chestOfDrawers') {
+        chestOfDrawersValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'chevalMirror') {
+        chevalMirrorValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'toys') {
+        toysValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bedroomChair') {
+        bedroomChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bedroomDesk') {
+        bedroomDeskValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'childStool') {
+        childStoolValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'cot') {
+        cotValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'twoDoorWardrobe') {
+        twoDoorWardrobeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'threeDoorWardrobe') {
+        threeDoorWardrobeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'mirrorDressingTable') {
+        mirrorDressingTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCartonBoxes5') {
+        packedCartonBoxes5Value = parseInt(input.value) || 0;
+      }
+      if (cabinetType === 'satelliteDish') {
+        satelliteDishValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'stonePedestal') {
+        stonePedestalValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'childPlayTable') {
+        childPlayTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'portableCooler') {
+        portableCoolerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'foldingChair') {
+        foldingChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'campingGear') {
+        campingGearValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'barbeque') {
+        barbequeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'wheelBarrow') {
+        wheelBarrowValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'picnicTable') {
+        picnicTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'scooter') {
+        scooterValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'ladder') {
+        ladderValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'workBench') {
+        workBenchValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'toolBox') {
+        toolBoxValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bicycle') {
+        bicycleValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'waterHose') {
+        waterHoseValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeBin') {
+        largeBinValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'deckChair') {
+        deckChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'fishingGear') {
+        fishingGearValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'plantPots') {
+        plantPotsValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeUmbrella') {
+        largeUmbrellaValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'gardenTools') {
+        gardenToolsValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedTableSoccer') {
+        closedTableSoccerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedTrampoline') {
+        closedTrampolineValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'trike') {
+        trikeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedPortableGazebo') {
+        closedPortableGazeboValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'outdoorFurnitureSet') {
+        outdoorFurnitureSetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'tableTennisClosed') {
+        tableTennisClosedValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCarbonBox6') {
+        packedCarbonBox6Value = parseInt(input.value) || 0;
+      } else if (cabinetType === 'satelliteDish') {
+        satelliteDishValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'stonePedestal') {
+        stonePedestalValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'childPlayTable') {
+        childPlayTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'portableCooler') {
+        portableCoolerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'foldingChair') {
+        foldingChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'campingGear') {
+        campingGearValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'barbeque') {
+        barbequeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'wheelBarrow') {
+        wheelBarrowValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'picnicTable') {
+        picnicTableValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'scooter') {
+        scooterValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'ladder') {
+        ladderValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'workBench') {
+        workBenchValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'toolBox') {
+        toolBoxValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'bicycle') {
+        bicycleValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'waterHose') {
+        waterHoseValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeBin') {
+        largeBinValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'deckChair') {
+        deckChairValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'fishingGear') {
+        fishingGearValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'plantPots') {
+        plantPotsValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'largeUmbrella') {
+        largeUmbrellaValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'gardenTools') {
+        gardenToolsValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedTableSoccer') {
+        closedTableSoccerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedTrampoline') {
+        closedTrampolineValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'trike') {
+        trikeValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'closedPortableGazebo') {
+        closedPortableGazeboValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'outdoorFurnitureSet') {
+        outdoorFurnitureSetValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'tableTennisClosed') {
+        tableTennisClosedValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCarbonBox6') {
+        packedCarbonBox6Value = parseInt(input.value) || 0;
+      } else if (cabinetType === 'washingMachine') {
+        washingMachineValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'tumbleDryer') {
+        tumbleDryerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'laundryHorse') {
+        laundryHorseValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'broomSticks') {
+        broomSticksValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'vacuumCleaner') {
+        vacuumCleanerValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'laundryBasket') {
+        laundryBasketValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'smallLaundryCupboard') {
+        smallLaundryCupboardValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'ironingBoard') {
+        ironingBoardValue = parseInt(input.value) || 0;
+      } else if (cabinetType === 'packedCarbonBox7') {
+        packedCarbonBox7Value = parseInt(input.value) || 0;
+      }
+
+      updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+      const totalPriceElement = document.querySelector('.total-price');
+      const totalPriceElement2 = document.querySelector('.total-price-two');
+      const totalPrice = crystalValue * 1.42 + buffetValue * 0.66 + diningValue * 0.14 + diningTable4 * 0.95 + diningTable6 * 1.42 + diningTable8 * 2.57 + packedCartonBoxes * 0.76 + bookCaseValue * 0.57 + chinaCabinetValue * 0.62 + wallUnitValue * 0.57 + tvUnitValue * 0.28 + armChairValue * 0.48 + bureauValue * 0.52 + liquorCabinetValue * 0.28 + barstoolValue * 0.14 + billiardTableValue * 2.28 + twoSeaterSofaValue * 0.95 + threeSeaterSofaValue * 1.23 + wallFirePlaceValue * 0.19 + cornerSofaValue * 2.18 + divianValue * 1.14 + lampTableValue * 0.24 + pianoValue * 0.95 + pianoStoolValue * 0.14 + deskValue * 0.43 + flatScreenTvValue * 0.05 + sofaFootrestValue * 0.24 + soundSystemValue * 0.1 + officeChairValue * 0.28 + coffeeTableValue * 0.24 + largeBeanBagValue * 0.48 + mediumShelvingValue * 0.28 + packedCartonBoxes2Value * 0.1 + hoosierCabinetValue * 1.42 + smallChestFreezerValue * 0.28 + kitchenChairValue * 0.14 + singleFridgeValue * 0.52 + doubleFridgeValue * 1.05 + cookerWithOvenValue * 0.38 + microwaveValue * 0.05 + smallFridgeValue * 0.28 + largeTableValue * 1.42 + smallTableValue * 0.62 + highChairValue * 0.14 + dishwasherValue * 0.38 + stoolValue * 0.14 + wineChillerValue * 0.28 + butcherBlockValue * 0.05 + doubleChestFreezerValue * 0.57 + packedCartonBoxes3Value * 0.1 + vaseValue * 0.1 + coatStandValue * 0.14 + hallwayChairValue * 0.14 + hallStandValue * 0.38 + dropSideTableValue * 0.38 + pictureFramesValue * 0.14 + hallwayTableValue * 0.28 + storageChestValue * 0.38 + grandFatherClockValue * 0.24 + packedCartonBoxes4Value * 0.1 + singleBedAndMattressValue * 0.71 + queenBedAndMattressValue * 0.95 + kingBedAndMattressValue * 1.19 + bedsideTableValue * 0.28 + chestOfDrawersValue * 0.57 + chevalMirrorValue * 0.28 + toysValue * 0.28 + bedroomChairValue * 0.14 + bedroomDeskValue * 0.43 + childStoolValue * 0.1 + cotValue * 0.66 + twoDoorWardrobeValue * 1.05 + threeDoorWardrobeValue * 1.52 + mirrorDressingTableValue * 0.62 + packedCartonBoxes5Value * 0.1 + satelliteDishValue * 0.38 + stonePedestalValue * 0.1 + childPlayTableValue * 0.28 + portableCoolerValue * 0.1 + foldingChairValue * 0.05 + campingGearValue * 0.19 + barbequeValue * 0.71 + wheelBarrowValue * 0.43 + picnicTableValue * 1.81 + scooterValue * 0.1 + ladderValue * 0.38 + workBenchValue * 0.86 + toolBoxValue * 0.05 + bicycleValue * 0.19 + waterHoseValue * 0.05 + largeBinValue * 0.57 + deckChairValue * 0.19 + fishingGearValue * 0.1 + plantPotsValue * 0.1 + largeUmbrellaValue * 0.19 + gardenToolsValue * 0.05 + closedTableSoccerValue * 0.48 + closedTrampolineValue * 0.48 + trikeValue * 0.14 + closedPortableGazeboValue * 0.38 + outdoorFurnitureSetValue * 2.38 + tableTennisClosedValue * 0.96 + packedCarbonBox6Value * 0.1 + washingMachineValue * 0.57 + tumbleDryerValue * 0.38 + laundryHorseValue * 0.05 + broomSticksValue * 0.05 + vacuumCleanerValue * 0.05 + laundryBasketValue * 0.05 + smallLaundryCupboardValue * 0.38 + ironingBoardValue * 0.05 + packedCarbonBox7Value * 0.1 + foldingBedValue * 0.38 + boxingBenchValue * 0.57 + heaterValue * 0.1 + suitcasesValue * 0.1 + boxRoomFanValue * 0.1 + matsRugsValue * 0.1 + boxRoomCupboardValue * 0.57 + boxRoomFoldingChairValue * 0.1 + fillingCabinetValue * 0.38 + foldingCardTableValue * 0.05 + pramValue * 0.19 + sewingMachineCabinetValue * 0.28 + packedCarbonBox8Value * 0.1;
+      totalPriceElement.textContent = totalPrice.toFixed(2) + ' m³';
+      totalPriceElement2.textContent = totalPrice.toFixed(2) + ' m³';
+      return totalPrice
+    }
+
+    const handleNext = () => {
+      const res = updateTotalPrice();
+     
+
+      window.parent.postMessage(parseFloat(res), "*")
+    }
+
+    function toggleAccordion(header) {
+      const accordionItem = header.parentNode;
+      accordionItem.classList.toggle('active');
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>
