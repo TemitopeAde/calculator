@@ -2959,6 +2959,888 @@
           </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Kids items/playroom section</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="pramClosed">
+            <h3>Pram (closed)</h3>
+            <p>0.2 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="childPlayTable">
+            <h3>Child Play Table</h3>
+            <p>0.30 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="childrenCot">
+            <h3>Cot</h3>
+            <p>0.7 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="childrenScotter">
+            <h3>Scotter</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="kidsBicycle">
+            <h3>Kids bicycle</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="tricycle">
+            <h3>Tricycle</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="toyVehicles">
+            <h3>Toy Vehicles</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1d4de95ac33451195dadfbed196feea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="kidKitchenette">
+            <h3>Kid’s Kitchenette</h3>
+            <p>0.30 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27c7a9e88ccd49668a764b419562c42d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="dollhouse">
+            <h3>Dollhouse</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="childStool">
+            <h3>Child Stool</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="highChair">
+            <h3>High-Chair</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_475b3a5a677a4ad5b32018e2eb22d599~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Home Office</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="homeOfficeDesk">
+            <h3>Desk</h3>
+            <p>0.45 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="officeChair">
+            <h3>Office Chair</h3>
+            <p>0.30 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="underDeskDrawers">
+            <h3>Under Desk Drawers</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="officeFillingCabinet">
+            <h3>Filling Cabinet</h3>
+            <p>0.75 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="flatScreenMonitor">
+            <h3>Flat Screen Monitor</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="computerTower">
+            <h3>Computer Tower</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="wastePaperBins">
+            <h3>Waste Paper Bins</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1d4de95ac33451195dadfbed196feea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="smallPrinter">
+            <h3>Small Printer</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27c7a9e88ccd49668a764b419562c42d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="largePrinter">
+            <h3>Large Printer</h3>
+            <p>0.75 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="dismembledDesk">
+            <h3>Dissembled Desk</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="serverRack">
+            <h3>Server Rack</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_475b3a5a677a4ad5b32018e2eb22d599~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="cabinet" id="Shredder">
+            <h3>Shredder</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="boardRoomTable">
+            <h3>Board Room Table</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="glassFilingCabinet">
+            <h3>Glass Filing Cabinet</h3>
+            <p>1.00 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="noticeBoard">
+            <h3>Notice Board</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="mouseKeyboard">
+            <h3>Mouse & Keyboard</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="waterDispenser">
+            <h3>Water Dispenser</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Music Instruments & Home studio</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="piano">
+            <h3>Piano</h3>
+            <p>1.00 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="MusicPianoStool">
+            <h3>Piano Stool</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="guitarCases">
+            <h3>Guitar Case</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="instrumentStand">
+            <h3>Instrument Stand</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="drumKit">
+            <h3>Drum Kit</h3>
+            <p>1.00 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="electricKeyboard">
+            <h3>Electric Keyboard</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="mediumAmp">
+            <h3>Medium Amp</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1d4de95ac33451195dadfbed196feea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="largeAmp">
+            <h3>Large amp</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27c7a9e88ccd49668a764b419562c42d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="mixer">
+            <h3>Mixer</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="soundproofingPanels">
+            <h3>Soundproofing Panels</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="studioSpeakers">
+            <h3>Studio Speakers</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_475b3a5a677a4ad5b32018e2eb22d599~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="cabinet" id="paSystem">
+            <h3>PA System</h3>
+            <p>0.75 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="guitarPedal">
+            <h3>Guitar Pedal</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="djembe">
+            <h3>Djembe</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h1>Gym & Leisure Room</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="cabinet" id="GymBarstool">
+            <h3>Barstool</h3>
+            <p>0.15 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="gymnLiquorTrolley">
+            <h3>Liquor Trolley</h3>
+            <p>0.30 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="billardTable">
+            <h3>Billard Table</h3>
+            <p>2.40 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_adb0aa87d51940faa16087bad00f804b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="foldingCardTable">
+            <h3>Folding Card Table</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_54c64b7efa454a5e913d0e45a45b5b1b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="gymnTableTennisClosed">
+            <h3>Table Tennis (closed)</h3>
+            <p>1.00 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_d44c2c1706f643bab1917ec909a52b06~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="gymnTableSocceRDissembled">
+            <h3>Table Soccer (Dissembled)</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ff813c1dc9d24ae2b3596d7f281ee3aa~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="projectorScreen">
+            <h3>Projector Screen</h3>
+            <p>0.10 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_e1d4de95ac33451195dadfbed196feea~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="projector">
+            <h3>Projector</h3>
+            <p>0.05 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_27c7a9e88ccd49668a764b419562c42d~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="treadmill">
+            <h3>Treadmill</h3>
+            <p>0.75 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_09ddf1c7735146cd947929b0ff5a0fb2~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="cabinet" id="exerciseBike">
+            <h3>Exercise Bike</h3>
+            <p>0.75 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_ba900f9558da4b81a366e2c3e4e95069~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet" id="weights">
+            <h3>Weights</h3>
+            <p>0.20 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_475b3a5a677a4ad5b32018e2eb22d599~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="cabinet" id="benchPress">
+            <h3>Bench Press</h3>
+            <p>0.50 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/66864b_943dbc4943cc4d8db731eaaff2132873~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet" id="rowingMachine">
+            <h3>Rowing Machine</h3>
+            <p>0.30 m³</p>
+            <div class="content-image">
+              <img src="https://static.wixstatic.com/media/b33b65_3367d009a6ec4a90aa2e327ee158f56b~mv2.png" alt="icon">
+            </div>
+            <div class="input-container">
+              <div>
+                <button role="button" class="subtraction" onclick="adjustValue(this, -1)">-</button>
+                <input type="number" class="number-input" oninput="handleInput(this)">
+                <button role="button" class="addition" onclick="adjustValue(this, 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -3153,6 +4035,71 @@
     let acPortableValue = 0;
     let broomSticksMopsValue = 0;
     let bucketValue = 0;
+
+
+    let pramClosedValue = 0;
+    let kidsChildPlayTableValue = 0;
+    let childrenCotValue = 0;
+    let childrenScotterValue = 0;
+    let kidsBicycleValue = 0;
+    let tricycleValue = 0;
+    let toyVehiclesValue = 0;
+    let kidKitchenetteValue = 0;
+    let dollhouseValue = 0;
+    let kidsChildStoolValue = 0;
+    let kidsHighChairValue = 0;
+
+
+    let homeOfficeDeskValue = 0;
+    let homeOfficeChairValue = 0;
+    let underDeskDrawersValue = 0;
+    let officeFillingCabinetValue = 0;
+    let flatScreenMonitorValue = 0;
+    let computerTowerValue = 0;
+    let wastePaperBinsValue = 0;
+    let smallPrinterValue = 0;
+    let largePrinterValue = 0;
+    let dissembledDeskValue = 0;
+    let serverRackValue = 0;
+    let shredderValue = 0;
+    let boardRoomTableValue = 0;
+    let glassFilingCabinetValue = 0;
+    let noticeBoardValue = 0;
+    let mouseKeyboardValue = 0;
+    let waterDispenserValue = 0;
+
+
+    let musicPianoValue = 0;
+    let musicPianoStoolValue = 0;
+    let guitarCasesValue = 0;
+    let instrumentStandValue = 0;
+    let drumKitValue = 0;
+    let electricKeyboardValue = 0;
+    let mediumAmpValue = 0;
+    let largeAmpValue = 0;
+    let mixerValue = 0;
+    let soundproofingPanelsValue = 0;
+    let studioSpeakersValue = 0;
+    let paSystemValue = 0;
+    let guitarPedalValue = 0;
+    let djembeValue = 0;
+
+
+    let gymBarstoolValue = 0;
+    let gymnLiquorTrolleyValue = 0;
+    let billardTableValue = 0;
+    let gymnFoldingCardTableValue = 0;
+    let gymnTableTennisClosedValue = 0;
+    let gymnTableSoccerDissembledValue = 0;
+    let projectorScreenValue = 0;
+    let projectorValue = 0;
+    let treadmillValue = 0;
+    let exerciseBikeValue = 0;
+    let weightsValue = 0;
+    let benchPressValue = 0;
+    let rowingMachineValue = 0;
+
+
 
 
     function adjustValue(button, value) {
@@ -3920,7 +4867,7 @@
         + sideboardValue * 0.75 + liquorTrolleyValue * 0.3 + diningTableDismantledValue * 1.5 + smallUnitValue * 0.3 + wallUnitDismantledValue * 1.5 + floorLampValue * 0.3
         + tableLampValue * 0.05 + oneWallKitchenValue * 3.00 + smallPictureFrameValue * 0.05 + largeVaseValue * 0.50 + shoeRackValue * 0.5 + doubleBedMattressValue * 1.5 + singleMattressValue * 0.5 + doubleMattressValue * 0.75 + singleElectricBedValue * 1.00
         + mountainBikeValue * 0.2 + firePitValue * 0.3 + hallwayBenchValue * 0.6 + awningValue * 0.15 + outdoorGasHeaterValue * 0.75 + outdoorPizzaOvenValue * 0.75 + outdoorSwingValue * 0.75 + hammockStandsValue * 0.3 + kennelsValue * 0.3 + petBedsValue * 0.05 + catScratchPolesValue * 0.1 + aquariumValue * 0.15
-        + laundrySinkCupboardValue*0.1 + boxroomLadderValue*0.05 + windowBlindsValue*0.1 + largeCarpetValue*0.3 + radiatorHeaterValue*0.1 + dehumidifierValue*0.2 + boxRoomtoolBoxValue*0.2 + indoorGasHeaterValue*0.3 + acCompressorValue*0.5 + acPortableValue*0.3 + broomSticksMopsValue*0.05 + bucketValue*0.05
+        + laundrySinkCupboardValue * 0.1 + boxroomLadderValue * 0.05 + windowBlindsValue * 0.1 + largeCarpetValue * 0.3 + radiatorHeaterValue * 0.1 + dehumidifierValue * 0.2 + boxRoomtoolBoxValue * 0.2 + indoorGasHeaterValue * 0.3 + acCompressorValue * 0.5 + acPortableValue * 0.3 + broomSticksMopsValue * 0.05 + bucketValue * 0.05
         ;
       totalPriceElement.textContent = totalPrice.toFixed(2) + ' m³';
       totalPriceElement2.textContent = totalPrice.toFixed(2) + ' m³';
