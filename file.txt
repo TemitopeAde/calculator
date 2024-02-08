@@ -1,7 +1,20 @@
 Wall unit dismantled
+small unit
 Tv unit
 Double Bed + Mattress
 Single Electric Bed
 Mountain Bike
-Ladder
 Radiator Heater
+Table Tennis (closed)
+Table Soccer (Dissembled)
+Under Desk Drawers
+Child Play Table
+Tricycle
+
+
+Certainly, here's a rephrased version:
+
+1. I've reviewed your specifications, and I'm capable of handling the integration. However, I have a few inquiries:
+2. Are there any additional requirements or features that need to be considered? Has there been any prior integration with Stripe, or am I tasked with completing the integration as well?
+3. Could you specify the particular page for the integration? Is the design of this page already completed, or is that also part of my responsibilities?
+4. I'd like clarification on the term "HMRC." Could you provide some context or information regarding its significance in this context?
